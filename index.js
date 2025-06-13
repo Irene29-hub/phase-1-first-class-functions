@@ -1,128 +1,66 @@
 // --- Exercise Routine Functions ---
 
-// Activity functions
-function runFiveMiles() {
-  console.log("Go for a five-mile run");
-}
-
-function liftWeights() {
-  console.log("Pump iron");
-}
-
-function swimFortyLaps() {
-  console.log("Swim 40 laps");
-}
-
-function exerciseRoutine(postRunActivity) {
-  runFiveMiles();
-  postRunActivity();
-}
-
-function morningRoutine(exercise) {
-  let breakfast;
-  if (exercise === liftWeights) {
-    breakfast = "protein bar";
-  } else if (exercise === swimFortyLaps) {
-    breakfast = "kale smoothie";
-  } else {
-    breakfast = "granola";
-  }
-  // Execute the exercise routine immediately
-  exerciseRoutine(exercise);
-
-  return function () {
-    console.log(`Nom nom nom, this ${breakfast} is delicious!`);
-  };
-}
-
-// LAB 1: Implement a function called saturdayFun
-function saturdayFun(activity = "roller-skate") {
-  return `This Saturday, I want to ${activity}!`;
-}
-
-// LAB 2: Implement a function expression called mondayWork
-const mondayWork = function(activity = "go to the office") {
-  return `This Monday, I will ${activity}.`;
-};
-
-// LAB 3: Implement a function called wrapAdjective (demonstrates closure)
-function wrapAdjective(flair = "*") {
-  return function (adjective = "special") {
-    return `You are ${flair}${adjective}${flair}!`;
-  };
-}
-
-// Function Expression: divide
-const divide = function() {
-  return 2000 / 100;
-};
-
-// Arrow Function: square
-const square = x => x * x;
-
-// Arrow Function: add
-// Renamed parameters to `num1` and `num2` for clearer numeric context.
-const add = (num1, num2) => num1 + num2;
-
+/**
+ * receivesAFunction
+ *
+ * This function takes a callback function as an argument and immediately calls it.
+ * The return value of this function itself is not important, only that the callback is executed.
+ *
+ * @param {function} callback - The function to be called.
+ */
 function receivesAFunction(callback) {
-   callback();
- 
+  // Call the provided callback function
+  callback();
 }
 
+/**
+ * returnsANamedFunction
+ *
+ * This function takes no arguments and returns a named function.
+ * The returned function does not perform any specific action,
+ * its purpose is to demonstrate returning a named function.
+ *
+ * @returns {function} A named function.
+ */
 function returnsANamedFunction() {
-  function exampleNamedFunction() {
-    return "I am a named function!";
+  // Define a named function
+  function myNamedFunction() {
+    console.log("This is a named function.");
   }
-  return exampleNamedFunction;
+  // Return the named function
+  return myNamedFunction;
 }
 
+/**
+ * returnsAnAnonymousFunction
+ *
+ * This function takes no arguments and returns an anonymous function.
+ * The returned function does not perform any specific action,
+ * its purpose is to demonstrate returning an anonymous function.
+ *
+ * @returns {function} An anonymous function.
+ */
 function returnsAnAnonymousFunction() {
-    return function() {
-    return "I am an anonymous function!";
+  // Return an anonymous function (using an arrow function for conciseness)
+  return () => {
+    console.log("This is an anonymous function.");
   };
 }
 
-console.log("--- Exercise Routine Examples ---");
-console.log("Monday's routine:");
-exerciseRoutine(liftWeights);
+// --- Example Usage (for testing purposes, not part of the required solution) ---
 
-console.log("\nTuesday's routine (using inline anonymous function):");
-exerciseRoutine(() => console.log("Swim 40 laps"));
+// Example for receivesAFunction:
+// function myCallback() {
+//   console.log("Callback function was called!");
+// }
+// receivesAFunction(myCallback);
 
-console.log("\nWednesday's routine (using inline arrow function for extra run):");
-exerciseRoutine(() => runFiveMiles());
+// Example for returnsANamedFunction:
+// const namedFunc = returnsANamedFunction();
+// namedFunc(); // This will log "This is a named function."
+// console.log("Name of returned named function:", namedFunc.name); // Should log "myNamedFunction"
 
-console.log("\nMorning Routine with Closure:");
-const afterLiftingBreakfast = morningRoutine(liftWeights);
-console.log("Time for breakfast after lifting:");
-afterLiftingBreakfast();
-
-const afterSwimmingBreakfast = morningRoutine(swimFortyLaps); 
-console.log("Time for breakfast after swimming:");
-afterSwimmingBreakfast(); 
-
-const afterPilatesBreakfast = morningRoutine(() => console.log("Stretch! Work that core!")); // This logs run & pilates
-console.log("Time for breakfast after pilates:");
-afterPilatesBreakfast(); 
-
-console.log("\n--- Previous Lab Functions Verification ---");
-console.log("saturdayFun():", saturdayFun());
-console.log("saturdayFun('cycling'):", saturdayFun('cycling'));
-console.log("mondayWork():", mondayWork());
-console.log("mondayWork('code review'):", mondayWork('code review'));
-console.log("wrapAdjective()():", wrapAdjective()());
-console.log("wrapAdjective('**')('awesome'):", wrapAdjective('**')('awesome'));
-console.log("divide():", divide());
-console.log("square(8):", square(8));
-console.log("add(15, 25):", add(15, 25)); 
-console.log("\n--- First-Class Functions Lab Requirements ---");
-
-const mySimpleCallback = () => console.log("The simple callback was executed by receivesAFunction!");
-console.log("Calling receivesAFunction:");
-receivesAFunction(mySimpleCallback);
-
-const returnedNamedFunction = returnsANamedFunction();
-console.log("Calling function returned by returnsANamedFunction:", returnedNamedFunction());
-
-const returnedAnonymousFunction = returnsAnAnonymousFunction();
-console.log("Calling function returned by returnsAnAnonymousFunction:", returnedAnonymousFunction());
+// Example for returnsAnAnonymousFunction:
+// const anonymousFunc = returnsAnAnonymousFunction();
+// anonymousFunc(); // This will log "This is an anonymous function."
+// console.log("Name of returned anonymous function:", anonymousFunc.name); // Should log "" or a generated name like "anonymous"
